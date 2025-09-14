@@ -1,19 +1,75 @@
-name: Build and Deploy
+name: Build and Deploy to AWS Lightsail
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install
+      - name: Build Docker image
+        run: docker build -t dream-predict-app .
 
-      - name: Build the app
-        run: npm run build
+      - name: Save Docker image
+        run: docker save dream-predict-app | gzip > dream-predict-app.tar.gz
+
+      - name: Deploy to Lightsail
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.LIGHTSAIL_HOST }}
+          username: ${{ secrets.LIGHTSAIL_USERNAME }}
+          key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          port: 22
+          script_stop: true
+          script: |
+            # Stop existing container if running
+            docker stop dream-predict-app || true
+            docker rm dream-predict-app || true
+
+            # Remove old image
+            docker rmi dream-predict-app || true
+
+            # Create app directory if not exists
+            mkdir -p ~/app
+
+      - name: Copy Docker image to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.LIGHTSAIL_HOST }}
+          username: ${{ secrets.LIGHTSAIL_USERNAME }}
+          key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          port: 22
+          source: "dream-predict-app.tar.gz"
+          target: "~/app/"
+
+      - name: Load and run Docker container
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.LIGHTSAIL_HOST }}
+          username: ${{ secrets.LIGHTSAIL_USERNAME }}
+          key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          port: 22
+          script: |
+            cd ~/app
+
+            # Load Docker image
+            docker load < dream-predict-app.tar.gz
+
+            # Run new container
+            docker run -d \
+              --name dream-predict-app \
+              --restart unless-stopped \
+              -p 80:3000 \
+              -e NODE_ENV=production \
+              dream-predict-app
+
+            # Clean up
+            rm -f dream-predict-app.tar.gz
+
+            # Show running containers
+            docker ps
