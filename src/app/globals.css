@@ -12,7 +12,7 @@
 
 @layer components {
   .tail-input {
-    @apply w-full rounded-2xl border border-gold-600/30 bg-mystical-800/80 backdrop-blur-sm px-4 py-2.5 text-sm text-gold-200 placeholder-gold-500/60 outline-none ring-0 focus:border-gold-500 focus:bg-mystical-700/80 focus:shadow-lg focus:shadow-gold-500/20 transition-all duration-300;
+    @apply w-full rounded-2xl border border-gold-600/30 bg-mystical-800/80 backdrop-blur-sm px-6 py-4 text-lg text-gold-200 placeholder-gold-500/60 outline-none ring-0 focus:border-gold-500 focus:bg-mystical-700/80 focus:shadow-lg focus:shadow-gold-500/20 transition-all duration-300;
   }
   
   .result-card {
@@ -47,7 +47,7 @@
   }
   
   .gold-button {
-    @apply inline-flex items-center gap-2 rounded-2xl bg-gold-gradient text-mystical-900 px-6 py-3 text-sm font-bold shadow-lg shadow-gold-600/30 hover:shadow-xl hover:shadow-gold-500/40 active:scale-95 transition-all duration-300 relative overflow-hidden;
+    @apply inline-flex items-center gap-3 rounded-2xl bg-gold-gradient text-mystical-900 px-8 py-4 text-lg font-bold shadow-lg shadow-gold-600/30 hover:shadow-xl hover:shadow-gold-500/40 active:scale-95 transition-all duration-300 relative overflow-hidden;
   }
   
   .gold-button::before {
@@ -60,11 +60,11 @@
   }
   
   .mystical-input-group {
-    @apply space-y-2;
+    @apply space-y-4;
   }
   
   .mystical-label {
-    @apply block text-sm font-medium text-gold-300 mb-2;
+    @apply block text-lg font-semibold text-gold-300 mb-3;
   }
   
   .floating-orb {

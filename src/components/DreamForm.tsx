@@ -110,12 +110,12 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mystical-card p-6 md:p-8 space-y-6 relative"
+      className="mystical-card p-8 md:p-12 space-y-8 relative max-w-4xl mx-auto"
     >
       <div className="relative z-10">
         <div className="mystical-input-group">
           <label className="mystical-label">🗓️ วันที่ต้องการทำนาย</label>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <select
               required
               value={formData.day}
@@ -162,7 +162,7 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
 
         <div className="mystical-input-group">
           <label className="mystical-label">🎂 วัน/เดือน/ปีเกิด</label>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <select
               required
               value={formData.birthDay}
@@ -215,7 +215,7 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
 
         <div className="mystical-input-group">
           <label className="mystical-label">⏰ เวลาเกิด</label>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <select
               required
               value={formData.hour}
@@ -260,23 +260,23 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
             value={formData.dream}
             onChange={handleChange("dream")}
             placeholder="เล่าความฝันของคุณ... ยิ่งละเอียดยิ่งแม่นยำ"
-            className="tail-input min-h-[120px] resize-y"
+            className="tail-input min-h-[150px] resize-y"
           />
-          <p className="text-xs text-gold-500/60 mt-2">
+          <p className="text-sm text-gold-500/60 mt-3">
             💡 เคล็ดลับ: อธิบายสิ่งที่เห็นในฝัน สถานที่ คน และความรู้สึก
           </p>
         </div>
 
-        <div className="flex items-center justify-between gap-3 pt-4">
-          <p className="text-xs text-gold-400/60">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6">
+          <p className="text-sm text-gold-400/60 text-center md:text-left">
             🔒 ข้อมูลของคุณปลอดภัย ใช้เพื่อประมวลผลเท่านั้น
           </p>
           <button type="submit" disabled={isLoading} className="gold-button group disabled:opacity-50 disabled:cursor-not-allowed">
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
             {isLoading ? 'กำลังทำนาย...' : 'ทำนายเลขเด็ด'}
-            <span className="text-xs">✨</span>
+            <span className="text-sm">✨</span>
           </button>
         </div>
       </div>
@@ -284,14 +284,14 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
       {/* Loading Modal */}
       {isLoading && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="mystical-card p-8 max-w-sm mx-4 text-center">
-            <div className="animate-spin h-12 w-12 border-4 border-gold-300 border-t-transparent rounded-full mx-auto mb-4"></div>
-            <h3 className="text-xl font-semibold text-gold-100 mb-2">🔮 กำลังทำนายความฝัน</h3>
-            <p className="text-gold-300 text-sm">เดี่ยวฝันจะกลายเป็นเลขเด็ด...</p>
-            <div className="flex justify-center mt-4 space-x-2">
-              <div className="w-2 h-2 bg-gold-400 rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-gold-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-              <div className="w-2 h-2 bg-gold-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+          <div className="mystical-card p-12 max-w-md mx-4 text-center">
+            <div className="animate-spin h-16 w-16 border-4 border-gold-300 border-t-transparent rounded-full mx-auto mb-6"></div>
+            <h3 className="text-2xl font-bold text-gold-100 mb-4">🔮 กำลังทำนายความฝัน</h3>
+            <p className="text-gold-300 text-lg">เดี่ยวฝันจะกลายเป็นเลขเด็ด...</p>
+            <div className="flex justify-center mt-6 space-x-3">
+              <div className="w-3 h-3 bg-gold-400 rounded-full animate-bounce"></div>
+              <div className="w-3 h-3 bg-gold-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+              <div className="w-3 h-3 bg-gold-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
             </div>
           </div>
         </div>
