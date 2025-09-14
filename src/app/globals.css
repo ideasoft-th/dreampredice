@@ -1,0 +1,123 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  body {
+    @apply bg-mystical-900 text-gold-300;
+  }
+}
+
+@layer components {
+  .tail-input {
+    @apply w-full rounded-2xl border border-gold-600/30 bg-mystical-800/80 backdrop-blur-sm px-4 py-2.5 text-sm text-gold-200 placeholder-gold-500/60 outline-none ring-0 focus:border-gold-500 focus:bg-mystical-700/80 focus:shadow-lg focus:shadow-gold-500/20 transition-all duration-300;
+  }
+  
+  .result-card {
+    @apply rounded-3xl bg-mystical-800/60 backdrop-blur-md border border-gold-600/20 p-6 shadow-2xl shadow-gold-900/20 relative overflow-hidden;
+  }
+  
+  .result-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-gold-600/5 via-transparent to-gold-800/5 pointer-events-none;
+  }
+  
+  .result-title {
+    @apply text-lg font-semibold mb-3 text-gold-300 relative z-10;
+  }
+  
+  .number-badge {
+    @apply inline-flex items-center justify-center rounded-xl border border-gold-500/40 bg-gradient-to-br from-gold-600/20 to-gold-800/20 backdrop-blur-sm px-3 py-1.5 text-sm font-semibold text-gold-200 hover:from-gold-500/30 hover:to-gold-700/30 hover:shadow-md hover:shadow-gold-500/30 transition-all duration-300 cursor-default;
+  }
+  
+  .mystical-card {
+    @apply rounded-3xl bg-mystical-800/40 backdrop-blur-lg border border-gold-600/20 shadow-2xl shadow-mystical-900/50 relative overflow-hidden;
+  }
+  
+  .mystical-card::before {
+    content: '';
+    @apply absolute inset-0 bg-mystical-radial pointer-events-none;
+  }
+  
+  .mystical-card::after {
+    content: '';
+    @apply absolute inset-0 bg-stars animate-twinkle opacity-30 pointer-events-none;
+  }
+  
+  .gold-button {
+    @apply inline-flex items-center gap-2 rounded-2xl bg-gold-gradient text-mystical-900 px-6 py-3 text-sm font-bold shadow-lg shadow-gold-600/30 hover:shadow-xl hover:shadow-gold-500/40 active:scale-95 transition-all duration-300 relative overflow-hidden;
+  }
+  
+  .gold-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-gold-200/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none;
+  }
+  
+  .mystical-nav {
+    @apply sticky top-0 z-40 backdrop-blur-md bg-mystical-900/80 border-b border-gold-600/20;
+  }
+  
+  .mystical-input-group {
+    @apply space-y-2;
+  }
+  
+  .mystical-label {
+    @apply block text-sm font-medium text-gold-300 mb-2;
+  }
+  
+  .floating-orb {
+    @apply absolute w-2 h-2 bg-gold-500/60 rounded-full animate-float blur-sm;
+  }
+  
+  .animation-delay-0 { animation-delay: 0s; }
+  .animation-delay-1000 { animation-delay: 1s; }
+  .animation-delay-2000 { animation-delay: 2s; }
+  .animation-delay-3000 { animation-delay: 3s; }
+  .animation-delay-4000 { animation-delay: 4s; }
+  
+  /* Custom scrollbar for mystical theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-mystical-800;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold-600/50 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold-500/70;
+  }
+  
+  /* Typewriter cursor animation */
+  .typewriter-cursor::after {
+    content: '|';
+    @apply text-gold-400 animate-pulse ml-1;
+  }
+  
+  .typewriter-text {
+    @apply inline-block;
+  }
+  
+  /* Staggered number reveal animation */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+}

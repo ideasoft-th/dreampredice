@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // User birth info
+  birthDay   Int
+  birthMonth Int
+  birthYear  Int
+  birthHour  Int
+  birthMinute Int
+
+  predictions DreamPrediction[]
+
+  @@map("users")
+}
+
+model DreamPrediction {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // User info
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Dream description
+  dreamText String
+
+  // Birth info (denormalized for easy access)
+  birthDay    Int
+  birthMonth  Int
+  birthYear   Int
+  birthHour   Int
+  birthMinute Int
+
+  // Prediction results
+  highlightNumbers String[] // เลขเด่น
+  twoDigitNumbers  String[] // เลข 2 ตัว
+  threeDigitNumbers String[] // เลข 3 ตัว
+  predictionText   String   // ข้อความทำนาย
+
+  @@map("dream_predictions")
+}
+
+model NumberPattern {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Pattern matching rules
+  keyword     String   @unique
+  numbers     String[]
+  description String
+  weight      Float    @default(1.0)
+
+  @@map("number_patterns")
+}

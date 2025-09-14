@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: dream_predict_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: dream_predict
+      POSTGRES_USER: dream_user
+      POSTGRES_PASSWORD: dream_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - dream_network
+
+  # Next.js Application
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dream_predict_app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "postgresql://dream_user:dream_password@postgres:5432/dream_predict"
+      NEXTAUTH_SECRET: "your-secret-key-here"
+      NEXTAUTH_URL: "http://localhost:3000"
+    ports:
+      - "3002:3000"
+    depends_on:
+      - postgres
+    networks:
+      - dream_network
+
+volumes:
+  postgres_data:
+
+networks:
+  dream_network:
+    driver: bridge
