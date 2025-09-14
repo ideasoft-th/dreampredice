@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Navigation from '@/components/Navigation'
 import DreamForm from '@/components/DreamForm'
 import Results from '@/components/Results'
+import SocialNetwork from '@/components/SocialNetwork'
 import Footer from '@/components/Footer'
 import LoadingOverlay from '@/components/LoadingOverlay'
 
@@ -78,7 +79,7 @@ export default function Home() {
       <header className="mx-auto max-w-5xl px-4 pt-10 pb-6 md:pt-14 md:pb-10 relative z-10">
         <div className="mystical-card p-6 md:p-10">
           <div className="relative z-10">
-            <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gold-gradient mb-3 animate-pulse-gold">
+            <h1 className="text-2xl md:text-4xl text-gold-300\/90 font-extrabold tracking-tight bg-clip-text bg-gold-gradient mb-3 animate-pulse-gold">
               🔮 ทำนายฝัน พร้อมเลขเด็ด ✨
             </h1>
             <p className="text-gold-300/90 text-base md:text-lg leading-relaxed">
@@ -96,6 +97,7 @@ export default function Home() {
       <div className="mx-auto max-w-5xl px-4 relative z-10">
         <DreamForm onSubmit={handlePredict} />
         {results && <Results results={results} />}
+        <SocialNetwork />
       </div>
 
       <Footer />
