@@ -45,7 +45,7 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
     };
 
     try {
-      const response = await fetch('https://ideasoft.app.n8n.cloud/webhook-test/dream-predict', {
+      const response = await fetch('https://ideasoft.app.n8n.cloud/webhook/dream-predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
