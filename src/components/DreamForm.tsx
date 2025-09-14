@@ -25,6 +25,8 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
     dream: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -45,6 +47,7 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
     };
 
     try {
+      setIsLoading(true);
       const response = await fetch('https://ideasoft.app.n8n.cloud/webhook/dream-predict', {
         method: 'POST',
         headers: {
@@ -63,6 +66,8 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
       console.error('Error calling API:', error);
       // Handle error - you might want to show an error message to user
       onSubmit({ error: 'เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง' });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -266,15 +271,31 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
           <p className="text-xs text-gold-400/60">
             🔒 ข้อมูลของคุณปลอดภัย ใช้เพื่อประมวลผลเท่านั้น
           </p>
-          <button type="submit" className="gold-button group">
+          <button type="submit" disabled={isLoading} className="gold-button group disabled:opacity-50 disabled:cursor-not-allowed">
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
-            ทำนายเลขเด็ด
+            {isLoading ? 'กำลังทำนาย...' : 'ทำนายเลขเด็ด'}
             <span className="text-xs">✨</span>
           </button>
         </div>
       </div>
+
+      {/* Loading Modal */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="mystical-card p-8 max-w-sm mx-4 text-center">
+            <div className="animate-spin h-12 w-12 border-4 border-gold-300 border-t-transparent rounded-full mx-auto mb-4"></div>
+            <h3 className="text-xl font-semibold text-gold-100 mb-2">🔮 กำลังทำนายความฝัน</h3>
+            <p className="text-gold-300 text-sm">เดี่ยวฝันจะกลายเป็นเลขเด็ด...</p>
+            <div className="flex justify-center mt-4 space-x-2">
+              <div className="w-2 h-2 bg-gold-400 rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-gold-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+              <div className="w-2 h-2 bg-gold-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+            </div>
+          </div>
+        </div>
+      )}
     </form>
   );
 }
