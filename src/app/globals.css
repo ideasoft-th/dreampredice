@@ -14,6 +14,30 @@
   .tail-input {
     @apply w-full rounded-2xl border border-gold-600/30 bg-mystical-800/80 backdrop-blur-sm px-6 py-4 text-lg text-gold-200 placeholder-gold-500/60 outline-none ring-0 focus:border-gold-500 focus:bg-mystical-700/80 focus:shadow-lg focus:shadow-gold-500/20 transition-all duration-300;
   }
+
+  /* TimePicker styling */
+  .tail-input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(62%) sepia(65%) saturate(395%) hue-rotate(1deg) brightness(103%) contrast(103%);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    width: 20px;
+    height: 20px;
+    opacity: 1 !important;
+  }
+
+  .tail-input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    background-color: rgba(202, 138, 4, 0.3);
+    transform: scale(1.1);
+  }
+
+  .tail-input[type="time"]::-webkit-inner-spin-button,
+  .tail-input[type="time"]::-webkit-clear-button {
+    display: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
   
   .result-card {
     @apply rounded-3xl bg-mystical-800/60 backdrop-blur-md border border-gold-600/20 p-6 shadow-2xl shadow-gold-900/20 relative overflow-hidden;

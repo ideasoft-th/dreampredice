@@ -20,8 +20,7 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
     birthDay: "",
     birthMonth: "",
     birthYear: "",
-    hour: "",
-    minute: "",
+    birthTime: "06:00",
     dream: "",
   });
 
@@ -37,11 +36,10 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
     // Format dates for API
     const birthDate = `${birthYear}-${formData.birthMonth.padStart(2, '0')}-${formData.birthDay.padStart(2, '0')}`;
     const predictionDate = `${predictionYear}-${formData.month.padStart(2, '0')}-${formData.day.padStart(2, '0')}`;
-    const birthTime = `${formData.hour.padStart(2, '0')}:${formData.minute.padStart(2, '0')}`;
 
     const apiData = {
       birth_date: birthDate,
-      birth_time: birthTime,
+      birth_time: formData.birthTime,
       dream_text: formData.dream,
       prediction_date: predictionDate
     };
@@ -73,7 +71,7 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
 
   const handleChange =
     (field: string) =>
-    (e: React.ChangeEvent<HTMLSelectElement | HTMLTextAreaElement>) => {
+    (e: React.ChangeEvent<HTMLSelectElement | HTMLTextAreaElement | HTMLInputElement>) => {
       setFormData((prev) => ({
         ...prev,
         [field]: e.target.value,
@@ -86,11 +84,6 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
   // Generate options for years (2500-2568 BE)
   const yearOptions = Array.from({ length: 69 }, (_, i) => 2568 - i);
 
-  // Generate options for hours (0-23)
-  const hourOptions = Array.from({ length: 24 }, (_, i) => i);
-
-  // Generate options for minutes (0-59)
-  const minuteOptions = Array.from({ length: 60 }, (_, i) => i);
 
   const monthNames = [
     "มกราคม",
@@ -215,39 +208,16 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
 
         <div className="mystical-input-group">
           <label className="mystical-label">⏰ เวลาเกิด</label>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <select
-              required
-              value={formData.hour}
-              onChange={handleChange("hour")}
-              className="tail-input"
-            >
-              <option value="" disabled>
-                ชั่วโมง
-              </option>
-              {hourOptions.map((hour) => (
-                <option key={hour} value={hour}>
-                  {hour.toString().padStart(2, "0")}
-                </option>
-              ))}
-            </select>
-
-            <select
-              required
-              value={formData.minute}
-              onChange={handleChange("minute")}
-              className="tail-input"
-            >
-              <option value="" disabled>
-                นาที
-              </option>
-              {minuteOptions.map((minute) => (
-                <option key={minute} value={minute}>
-                  {minute.toString().padStart(2, "0")}
-                </option>
-              ))}
-            </select>
-          </div>
+          <input
+            type="time"
+            required
+            value={formData.birthTime}
+            onChange={handleChange("birthTime")}
+            className="tail-input"
+          />
+          <p className="text-sm text-gold-500/60 mt-2">
+            💡 เลือกเวลาเกิดในรูปแบบ 24 ชั่วโมง (ค่าเริ่มต้น 06:00)
+          </p>
         </div>
 
         <div className="mystical-input-group">
