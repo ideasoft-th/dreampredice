@@ -154,7 +154,7 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
         </div>
 
         <div className="mystical-input-group">
-          <label className="mystical-label">🎂 วัน/เดือน/ปีเกิด</label>
+          <label className="mystical-label mt-6">🎂 วัน/เดือน/ปีเกิด</label>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <select
               required
@@ -207,7 +207,7 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
         </div>
 
         <div className="mystical-input-group">
-          <label className="mystical-label">⏰ เวลาเกิด</label>
+          <label className="mystical-label mt-6">⏰ เวลาเกิด</label>
           <input
             type="time"
             required
@@ -221,7 +221,7 @@ export default function DreamForm({ onSubmit }: DreamFormProps) {
         </div>
 
         <div className="mystical-input-group">
-          <label htmlFor="dream" className="mystical-label">
+          <label htmlFor="dream" className="mystical-label mt-6">
             💭 อธิบายความฝันของคุณ
           </label>
           <textarea
