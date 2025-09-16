@@ -79,15 +79,15 @@ export default function Home() {
       <header className="mx-auto max-w-5xl px-4 pt-10 pb-6 md:pt-14 md:pb-10 relative z-10">
         <div className="mystical-card p-6 md:p-10">
           <div className="relative z-10">
-            <h1 className="text-2xl md:text-4xl text-gold-300\/90 font-extrabold tracking-tight bg-clip-text bg-gold-gradient mb-3 animate-pulse-gold">
+            <h1 className="text-2xl md:text-4xl text-gold-300/90 font-extrabold tracking-tight bg-clip-text bg-gold-gradient mb-3 animate-pulse-gold">
               🔮 ทำนายฝัน พร้อมเลขเด็ด ✨
             </h1>
             <p className="text-gold-300/90 text-base md:text-lg leading-relaxed">
-              เปิดเผยความลับแห่งความฝัน กับการทำนายเลขเด็ดจากวันเดือนปีเกิด
+              เปิดเผยความลับแห่งโหราศาสตร์ กับ การทำนายเลขเด็ดจากความฝัน
             </p>
             <div className="mt-4 flex items-center gap-2 text-gold-400/80 text-sm">
               <span>🌙</span>
-              <span>ความลึกลับแห่งจักรวาล รอการค้นพบ</span>
+              <span>ความลึกลับแห่งโหราศาสตร์ รอการค้นพบ</span>
               <span>⭐</span>
             </div>
           </div>

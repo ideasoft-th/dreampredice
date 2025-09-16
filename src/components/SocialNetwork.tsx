@@ -10,7 +10,7 @@ export default function SocialNetwork() {
         </svg>
       ),
       color: 'hover:text-[#1877F2]',
-      href: '#'
+      href: 'https://www.facebook.com/profile.php?id=61577067675238'
     },
     {
       name: 'Instagram',
@@ -20,7 +20,7 @@ export default function SocialNetwork() {
         </svg>
       ),
       color: 'hover:text-[#E4405F]',
-      href: '#'
+      href: 'https://www.instagram.com/dream4number/'
     },
     {
       name: 'X (Twitter)',
@@ -30,7 +30,7 @@ export default function SocialNetwork() {
         </svg>
       ),
       color: 'hover:text-[#000000]',
-      href: '#'
+      href: 'https://x.com/Dream4munber'
     },
     {
       name: 'YouTube',
@@ -65,6 +65,8 @@ export default function SocialNetwork() {
             <a
               key={social.name}
               href={social.href}
+              target={social.href !== '#' ? '_blank' : '_self'}
+              rel={social.href !== '#' ? 'noopener noreferrer' : undefined}
               className={`
                 group flex flex-col items-center gap-2 p-4 rounded-2xl
                 border border-gold-600/30 bg-mystical-800/40 backdrop-blur-sm
